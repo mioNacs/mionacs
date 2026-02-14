@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="border-t-2 border-[var(--border-strong)] py-10">
       <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <p className="display-heading text-sm">
-          NR <span className="text-[var(--text-muted)] font-light">/ portfolio</span>
+          mioNacs <span className="text-[var(--text-muted)] font-light">/ portfolio</span>
         </p>
 
         <div className="flex gap-6">

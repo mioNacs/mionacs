@@ -64,7 +64,7 @@ export default function Navbar() {
             href="#hero"
             className="display-heading text-xl tracking-tight"
           >
-            NR
+            mioNacs
             <span className="text-[var(--text-muted)] font-light text-xs ml-1">
               / portfolio
             </span>

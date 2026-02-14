@@ -55,7 +55,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section ref={container} id="projects" className="relative h-screen bg-transparent">
+    <section ref={container} id="projects" className="relative h-screen bg-transparent" style={{ zIndex: 10 }}>
       {/* Chapter Marker - Static Top Left */}
       <div className="absolute top-8 left-6 md:top-24 md:left-12 z-50 pointer-events-none mix-blend-difference accent-text">
         <div className="chapter-number opacity-80">Chapter 03 — Work</div>
@@ -87,13 +87,13 @@ export default function Projects() {
                   <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
                 </div>
 
-                {/* Full Image */}
-                <div className="flex items-center justify-center">
-                   <div className="relative w-full h-full max-w-4xl shadow-xl rounded-lg overflow-hidden transition-transform duration-700 group-hover:scale-[1.02]">
+                {/* Full Image - Maximized height */}
+                <div className="w-full h-full pt-10 md:pt-12 flex items-center justify-center">
+                   <div className="relative w-full h-full shadow-lg overflow-hidden transition-transform duration-700 group-hover:scale-[1.01] bg-white">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-contain object-top bg-[var(--bg-primary)]" 
+                      className="w-full h-full object-contain object-top" 
                       loading="eager"
                     />
                    </div>

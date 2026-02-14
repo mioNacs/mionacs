@@ -6,9 +6,9 @@ export const personalInfo = {
   name: "Navneet Raj",
   title: "Full-Stack Developer",
   subtitle: "Building beautiful, performant web experiences",
-  email: "navneet@example.com",
+  email: "navneet78030@gmail.com",
   location: "India",
-  bio: "Passionate developer with expertise in modern web technologies. I love crafting immersive digital experiences using cutting-edge tools and frameworks.",
+  bio: "Final year student exploring the depths of full-stack development. I learn by building, breaking, and fixing things.",
   resumeUrl: "/resume.pdf",
 };
 

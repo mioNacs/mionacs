@@ -91,8 +91,7 @@ export default function Hero() {
 
           {/* Name */}
           <h1 className="display-heading hero-line opacity-0" style={{ fontSize: "clamp(3rem, 8vw, 6.5rem)" }}>
-            {personalInfo.name.split(" ")[0]}
-            <br />
+            {personalInfo.name.split(" ")[0]} <span> </span>
             <span className="accent-text">{personalInfo.name.split(" ").slice(1).join(" ")}</span>
           </h1>
 
