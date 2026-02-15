@@ -5,10 +5,9 @@
 export const personalInfo = {
   name: "Navneet Raj",
   title: "Full-Stack Developer",
-  subtitle: "Building beautiful, performant web experiences",
+  subtitle: "Building beautiful, scalable web experiences",
   email: "navneet78030@gmail.com",
   location: "India",
-  bio: "Final year student exploring the depths of full-stack development. I learn by building, breaking, and fixing things.",
   resumeUrl: "/resume.pdf",
 };
 
@@ -64,20 +63,17 @@ export interface Skill {
 }
 
 export const skills: Skill[] = [
-  { name: "React", category: "frontend", level: 95 },
-  { name: "Next.js", category: "frontend", level: 90 },
-  { name: "TypeScript", category: "frontend", level: 88 },
-  { name: "Three.js / R3F", category: "frontend", level: 75 },
-  { name: "GSAP", category: "frontend", level: 80 },
-  { name: "Tailwind CSS", category: "frontend", level: 92 },
-  { name: "Node.js", category: "backend", level: 85 },
-  { name: "Python", category: "backend", level: 78 },
-  { name: "PostgreSQL", category: "backend", level: 80 },
+  { name: "React", category: "frontend", level: 80 },
+  { name: "Next.js", category: "frontend", level: 85 },
+  { name: "TypeScript", category: "frontend", level: 50 },
+  { name: "Tailwind CSS", category: "frontend", level: 85 },
+  { name: "Node.js", category: "backend", level: 75 },
+  { name: "Express.js", category: "backend", level: 81 },
+  { name: "Python", category: "backend", level: 85 },
+  { name: "GitHub", category: "tools", level: 90 },
+  { name: "gsap", category: "tools", level: 90 },
   { name: "MongoDB", category: "backend", level: 75 },
   { name: "Git", category: "tools", level: 90 },
-  { name: "Docker", category: "tools", level: 70 },
-  { name: "Figma", category: "tools", level: 72 },
-  { name: "AWS", category: "tools", level: 65 },
 ];
 
 // ============================================================
@@ -85,41 +81,42 @@ export const skills: Skill[] = [
 // ============================================================
 export interface CollegePhoto {
   src: string;
-  date: string;
   caption: string;
 }
 
 export const collegePhotos: CollegePhoto[] = [
   {
     src: "/college/photo1.jpg",
-    date: "August 2021",
-    caption: "First day at college — new beginnings!",
+    caption: "Strings",
   },
   {
     src: "/college/photo2.jpg",
-    date: "January 2022",
-    caption: "Hackathon night — 36 hours of coding",
+    caption: "Hackath-one",
   },
   {
     src: "/college/photo3.jpg",
-    date: "March 2022",
-    caption: "Tech fest with the squad",
+    caption: "hackathon-1-night",
   },
   {
     src: "/college/photo4.jpg",
-    date: "October 2022",
-    caption: "Cultural night celebrations",
+    caption: "GFG-Patna",
   },
   {
     src: "/college/photo5.jpg",
-    date: "February 2023",
-    caption: "Project presentation day",
+    caption: "Hackathon-2-presentation",
   },
   {
     src: "/college/photo6.jpg",
-    date: "May 2023",
-    caption: "Farewell vibes — end of an era",
+    caption: "Hackathon-2-win",
   },
+  {
+    src: "/college/photo7.jpg",
+    caption: "Arttt...",
+  },
+  {
+    src: "/college/photo8.jpg",
+    caption: "Parasnath-Trip",
+  }
 ];
 
 // ============================================================
@@ -132,14 +129,14 @@ export interface SocialLink {
 }
 
 export const socialLinks: SocialLink[] = [
-  { platform: "GitHub", url: "https://github.com/navneet", icon: "github" },
+  { platform: "GitHub", url: "https://github.com/mioNacs", icon: "github" },
   {
     platform: "LinkedIn",
-    url: "https://linkedin.com/in/navneet",
+    url: "https://linkedin.com/in/mioNacs",
     icon: "linkedin",
   },
-  { platform: "Twitter", url: "https://twitter.com/navneet", icon: "twitter" },
-  { platform: "Email", url: "mailto:navneet@example.com", icon: "mail" },
+  { platform: "Twitter", url: "https://twitter.com/mioNacs", icon: "twitter" },
+  { platform: "Email", url: "mailto:navneet78030@gmail.com", icon: "email" },
 ];
 
 // ============================================================

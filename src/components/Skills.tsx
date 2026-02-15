@@ -12,17 +12,14 @@ const SKILL_META: Record<string, { slug: string; color: string; desc: string }> 
   "React":          { slug: "react",       color: "#61DAFB", desc: "Component-based UI library. My primary tool for building interfaces." },
   "Next.js":        { slug: "nextdotjs",   color: "#000000", desc: "Full-stack React framework. SSR, routing, API routes — the whole deal." },
   "TypeScript":     { slug: "typescript",  color: "#3178C6", desc: "Type-safe JavaScript. Catches bugs before they ship." },
-  "Three.js / R3F": { slug: "threedotjs",  color: "#000000", desc: "3D rendering in the browser. Used for immersive experiences." },
-  "GSAP":           { slug: "greensock",   color: "#88CE02", desc: "Professional-grade animation library. Smooth and performant." },
   "Tailwind CSS":   { slug: "tailwindcss", color: "#06B6D4", desc: "Utility-first CSS. Rapid prototyping with consistent design." },
   "Node.js":        { slug: "nodedotjs",   color: "#5FA04E", desc: "Server-side JavaScript runtime. APIs and backend services." },
   "Python":         { slug: "python",      color: "#3776AB", desc: "Scripting, automation, and data processing." },
-  "PostgreSQL":     { slug: "postgresql",  color: "#4169E1", desc: "Relational database. Complex queries and data integrity." },
   "MongoDB":        { slug: "mongodb",     color: "#47A248", desc: "NoSQL document database. Flexible schemas." },
   "Git":            { slug: "git",         color: "#F05032", desc: "Version control. Branching, merging, collaboration." },
-  "Docker":         { slug: "docker",      color: "#2496ED", desc: "Containerization. Consistent dev-to-prod environments." },
-  "Figma":          { slug: "figma",       color: "#F24E1E", desc: "UI/UX design tool. Wireframes to prototypes." },
-  "AWS":            { slug: "amazonaws",   color: "#FF9900", desc: "Cloud infrastructure. EC2, S3, Lambda deployments." },
+  "GitHub":         { slug: "github",      color: "#F05032", desc: "Version control. Branching, merging, collaboration." },
+  "gsap":           { slug: "gsap",        color: "#F05032", desc: "Version control. Branching, merging, collaboration." },
+  "express.js":     { slug: "expressjs",   color: "#F05032", desc: "Version control. Branching, merging, collaboration." },
 };
 
 function getSuit(cat: string) {

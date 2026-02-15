@@ -131,8 +131,7 @@ export default function CollegeCarousel() {
               className="display-heading text-4xl md:text-5xl lg:text-6xl"
               style={{ color: "#faf8f4" }}
             >
-              College{" "}
-              <span style={{ color: "#e8c860" }}>Life</span>
+              <span style={{ color: "#e8c860" }}>Carousel</span>
             </h2>
       </div>
 
@@ -161,7 +160,7 @@ export default function CollegeCarousel() {
             }}
           >
             {/* Image */}
-            <div className="card-img-wrapper w-full h-full overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.6)] bg-black">
+            <div className="card-img-wrapper w-full h-full overflow-hidden rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.6)] bg-black">
               <img
                 src={photo.src}
                 alt={photo.caption}
@@ -175,10 +174,7 @@ export default function CollegeCarousel() {
               className="card-caption text-center mt-3 opacity-0"
               style={{ transform: "translateY(10px)" }}
             >
-              <p className="text-white text-sm font-medium truncate">
-                {photo.caption}
-              </p>
-              <p className="text-white/40 text-xs mt-0.5">{photo.date}</p>
+              <p className="text-white/70 font-bold text-md mt-0.5" style={{letterSpacing: "1px"}}>{photo.caption}</p>
             </div>
           </div>
         ))}
