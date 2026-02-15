@@ -159,7 +159,7 @@ export default function About() {
         style={{ perspective: "1200px", perspectiveOrigin: "50% 50%" }}
       >
         {/* ── Chapter & Title Layer ── */}
-        <div className="absolute top-12 left-6 md:top-16 md:left-16 z-30">
+        <div className="absolute top-20 left-6 md:top-24 md:left-16 z-30">
           <div className="chapter-number mb-4">Chapter 01 — About</div>
           <h2 className="display-heading text-5xl md:text-6xl lg:text-8xl leading-[1] overflow-hidden">
             <span className="about-title-word inline-block mr-3" style={{ transformStyle: "preserve-3d" }}>
@@ -227,9 +227,16 @@ export default function About() {
 
                 {/* Decorative bottom bar */}
                 <div className="mt-8 flex gap-2">
-                  <div className="h-1 flex-1 bg-[var(--accent-primary)] rounded-full opacity-60" />
-                  <div className="h-1 w-8 bg-[var(--border-light)] rounded-full" />
-                  <div className="h-1 w-4 bg-[var(--border-light)] rounded-full" />
+                  {STORY_CARDS.map((_, j) => (
+                    <div
+                      key={j}
+                      className={`h-1 rounded-full transition-all duration-300 ${
+                        j === i
+                          ? "flex-1 bg-[var(--accent-primary)] opacity-60"
+                          : "w-6 bg-[var(--border-light)]"
+                      }`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>

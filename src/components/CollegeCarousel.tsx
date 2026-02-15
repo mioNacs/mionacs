@@ -7,7 +7,6 @@ import { collegePhotos } from "@/data/resume-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CARD_WIDTH = 320;
 const CARD_HEIGHT = 420;
 const CARD_GAP = 100; // overlap gap between cards
 
@@ -15,6 +14,7 @@ export default function CollegeCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(0); // track active without re-render for scroll
 
   const animate = useCallback((newActive: number) => {
     const stage = stageRef.current;
@@ -71,7 +71,39 @@ export default function CollegeCarousel() {
     });
   }, []);
 
+  // Scroll-driven navigation: pin section, scrub through photos
   useEffect(() => {
+    const section = containerRef.current;
+    if (!section) return;
+
+    // Initial render
+    animate(0);
+
+    const st = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      // Slow scroll: 80vh per photo
+      end: `+=${collegePhotos.length * 80}vh`,
+      pin: true,
+      scrub: 0.8,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        // Map scroll progress (0-1) to photo index
+        const newIndex = Math.round(self.progress * (collegePhotos.length - 1));
+        if (newIndex !== activeRef.current) {
+          activeRef.current = newIndex;
+          setActiveIndex(newIndex);
+          animate(newIndex);
+        }
+      },
+    });
+
+    return () => st.kill();
+  }, [animate]);
+
+  // Also animate on click (activeIndex state change)
+  useEffect(() => {
+    activeRef.current = activeIndex;
     animate(activeIndex);
   }, [activeIndex, animate]);
 
@@ -90,9 +122,10 @@ export default function CollegeCarousel() {
       id="gallery"
       ref={containerRef}
       className="relative py-32 overflow-hidden h-screen flex flex-col justify-center items-center bg-transparent"
+      style={{ zIndex: 15 }}
     >
       {/* Chapter Marker */}
-      <div className="absolute top-12 left-6 md:left-12 z-50 pointer-events-none mix-blend-difference">
+      <div className="absolute top-20 left-6 md:left-12 z-50 pointer-events-none mix-blend-difference">
         <div className="chapter-number text-white/50">Chapter 02 — Memories</div>
         <h2
               className="display-heading text-4xl md:text-5xl lg:text-6xl"
@@ -119,13 +152,12 @@ export default function CollegeCarousel() {
             className="coverflow-card absolute cursor-pointer"
             onClick={() => setActiveIndex(i)}
             style={{
-              width: `${CARD_WIDTH}px`,
               height: `${CARD_HEIGHT}px`,
               transformStyle: "preserve-3d",
-              left: "50%",
-              marginLeft: `-${CARD_WIDTH / 2}px`,
+              // left: "50%",
+              marginLeft: `-0px`,
               WebkitBoxReflect:
-                "below 4px linear-gradient(to bottom, rgba(255,255,255,0.15), transparent 70%)",
+                "below 4px linear-gradient(to top, rgba(255,255,255,0.15), transparent 60%)",
             }}
           >
             {/* Image */}

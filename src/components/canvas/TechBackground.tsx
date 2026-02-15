@@ -202,10 +202,10 @@ function Scene({
    ───────────────────────────────────────────── */
 const SECTION_COLOR_MAP: Record<string, string> = {
   hero:    "#faf8f4",
-  about:   "#f3efe8",
+  about:   "#fffbbb",
   gallery: "#1a1814",
-  projects:"#f5f0e6",
-  skills:  "#f0ebe0",
+  projects:"#fffbbb",
+  skills:  "#ffebe0",
   contact: "#faf8f4",
 };
 

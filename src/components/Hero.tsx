@@ -79,7 +79,7 @@ export default function Hero() {
       </div>
 
       {/* Decorative borders */}
-      <div className="absolute top-16 left-6 right-6 bottom-6 border-2 border-[var(--border-light)] rounded-sm pointer-events-none" />
+      <div className="absolute top-16 left-6 right-6 bottom-6  pointer-events-none" />
 
       {/* Content */}
       <div ref={contentRef} className="section-container relative z-10 pt-32 pb-20">

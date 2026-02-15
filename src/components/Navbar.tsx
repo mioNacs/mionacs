@@ -56,7 +56,7 @@ export default function Navbar() {
 
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg-primary)]/90 backdrop-blur-md border-bottom-strong"
+        className="fixed top-0 left-0 right-0 z-60 bg-[var(--bg-primary)]/70 backdrop-blur-md border-bottom-strong"
       >
         <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}

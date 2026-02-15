@@ -76,13 +76,12 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "YOUR_ACCESS_KEY",
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY", // Ensure it's never empty string
           name: formState.name,
           email: formState.email,
           message: formState.message,
@@ -90,12 +89,16 @@ export default function Contact() {
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         setSubmitted(true);
         setFormState({ name: "", email: "", message: "" });
+      } else {
+        console.error("Web3Forms Error:", result.message);
       }
-    } catch {
-      // Silent error handling
+    } catch (error) {
+      console.error("Submission Error:", error);
     } finally {
       setSending(false);
     }

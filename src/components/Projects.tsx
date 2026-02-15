@@ -57,7 +57,7 @@ export default function Projects() {
   return (
     <section ref={container} id="projects" className="relative h-screen bg-transparent" style={{ zIndex: 10 }}>
       {/* Chapter Marker - Static Top Left */}
-      <div className="absolute top-8 left-6 md:top-24 md:left-12 z-50 pointer-events-none mix-blend-difference accent-text">
+      <div className="absolute top-20 left-6 md:top-24 md:left-12 z-50 pointer-events-none mix-blend-difference accent-text">
         <div className="chapter-number opacity-80">Chapter 03 — Work</div>
         <h2 className="display-heading text-4xl md:text-5xl lg:text-6xl mt-2">
           Selected <span className="opacity-70">Builds.</span>
@@ -72,14 +72,14 @@ export default function Projects() {
         {projects.map((project, i) => (
           <div
             key={i}
-            className="project-card absolute top-0 left-0 w-full h-full flex items-center justify-center pt-24 pb-8 px-4 md:pt-0 md:pb-0 md:px-0"
+            className="project-card absolute top-0 left-0 w-full h-full flex items-center justify-center pt-30 pb-8 px-4 md:pt-0 md:pb-0 md:px-0"
             style={{ zIndex: i + 1 }}
           >
-            {/* Card: Vertical Layout (Image Top, Content Bottom) */}
-            <div className="w-full h-full max-h-[75vh] md:max-h-[85vh] flex flex-col bg-[var(--bg-card)] rounded-2xl overflow-hidden shadow-2xl border border-[var(--border-strong)]">
+            {/* Card: Horizontal on desktop */}
+            <div className="w-full max-h-[75vh] md:max-h-[85vh] flex flex-col md:flex-row bg-[var(--bg-card)] rounded-2xl overflow-hidden shadow-2xl border-2 border-[var(--border-strong)]">
               
-              {/* Image Area - Flexible height, shows full image */}
-              <div className="relative flex-1 bg-[var(--bg-secondary)] overflow-hidden group min-h-[40%] md:min-h-[55%]">
+              {/* Image Area */}
+              <div className="relative flex-1 bg-[var(--bg-secondary)] overflow-hidden group md:min-h-full">
                 {/* Browser Header */}
                 <div className="absolute top-0 left-0 w-full h-8 bg-black/10 backdrop-blur-md z-10 flex items-center px-4 gap-2 border-b border-[var(--border-light)]">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
@@ -87,21 +87,17 @@ export default function Projects() {
                   <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
                 </div>
 
-                {/* Full Image - Maximized height */}
-                <div className="w-full h-full pt-10 md:pt-12 flex items-center justify-center">
-                   <div className="relative w-full h-full shadow-lg overflow-hidden transition-transform duration-700 group-hover:scale-[1.01] bg-white">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-contain object-top" 
-                      loading="eager"
-                    />
-                   </div>
-                </div>
+                {/* Full Image */}
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover object-top pt-8"
+                  loading="eager"
+                />
               </div>
 
-              {/* Content Area - Bottom */}
-              <div className="p-6 md:p-8 flex flex-col justify-between border-t border-[var(--border-light)] bg-[var(--bg-card)] h-auto md:h-[40%]">
+              {/* Content Area */}
+              <div className="p-6 md:p-8 flex flex-col justify-between border-t-2 md:border-t-0 md:border-l-2 border-[var(--border-strong)] bg-[var(--bg-card)] md:w-[40%]">
                 <div>
                   <div className="flex items-start justify-between gap-4 mb-2">
                     <h3 className="text-2xl md:text-3xl font-bold leading-tight text-[var(--text-primary)]">
