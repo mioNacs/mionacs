@@ -4,6 +4,13 @@ import { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Edges } from "@react-three/drei";
 import * as THREE from "three";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 /* ─────────────────────────────────────────────
    Shape configs
@@ -220,90 +227,99 @@ export default function TechBackground() {
   const bgColor = useRef(new THREE.Color("#faf8f4"));
 
   useEffect(() => {
-    const handleScroll = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      scrollProgress.current = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+    // Store triggers for cleanup
+    const triggers: ScrollTrigger[] = [];
 
-      // ── Compute background color from actual DOM positions ──
-      const vh = window.innerHeight;
-      const viewCenter = vh / 2;
+    // Wait for Lenis to initialize
+    const timer = setTimeout(() => {
+      console.log("TechBackground: Creating ScrollTriggers");
+      
+      // ── Overall scroll progress ──
+      triggers.push(
+        ScrollTrigger.create({
+          trigger: "body",
+          start: "top top",
+          end: "bottom bottom",
+          onUpdate: (self) => {
+            scrollProgress.current = self.progress;
+          },
+          // markers: true, // Uncomment to debug
+        })
+      );
 
-      // Find which section the viewport center is in, and interpolate
-      let activeColor = SECTION_COLOR_MAP.hero;
-      let nextColor = SECTION_COLOR_MAP.hero;
-      let blend = 0;
+      // ── Background color transitions for each section ──
+      SECTION_IDS.forEach((sectionId, index) => {
+        const currentColor = SECTION_COLOR_MAP[sectionId];
+        const nextSectionId = SECTION_IDS[index + 1];
+        const nextColor = nextSectionId
+          ? SECTION_COLOR_MAP[nextSectionId]
+          : currentColor;
 
-      for (let i = 0; i < SECTION_IDS.length; i++) {
-        const el = document.getElementById(SECTION_IDS[i]);
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
+        triggers.push(
+          ScrollTrigger.create({
+            trigger: `#${sectionId}`,
+            start: "top top",
+            end: "bottom top",
+            // markers: { startColor: "green", endColor: "red", fontSize: "12px" }, // Uncomment to debug
+            onEnter: () => {
+              console.log(`Entering section: ${sectionId}`);
+              bgColor.current.set(currentColor);
+            },
+            onEnterBack: () => {
+              console.log(`Entering back section: ${sectionId}`);
+              bgColor.current.set(currentColor);
+            },
+            onUpdate: (self) => {
+              // Smoothly blend to next color in last 20% of section
+              if (self.progress > 0.8 && nextSectionId) {
+                const blendFactor = (self.progress - 0.8) / 0.2;
+                const c = new THREE.Color(currentColor);
+                c.lerp(new THREE.Color(nextColor), blendFactor);
+                bgColor.current.copy(c);
+              } else {
+                bgColor.current.set(currentColor);
+              }
+            },
+          })
+        );
+      });
 
-        if (rect.top <= viewCenter && rect.bottom > viewCenter) {
-          // Viewport center is inside this section
-          activeColor = SECTION_COLOR_MAP[SECTION_IDS[i]];
+      // ── Dark mode effect for gallery section ──
+      triggers.push(
+        ScrollTrigger.create({
+          trigger: "#gallery",
+          start: "top-=150 center",
+          end: "bottom center",
+          // markers: true, // Uncomment to debug
+          onUpdate: (self) => {
+            const depth = Math.min(self.progress * 2, 1); // Ramp up dark effect
+            darkAmount.current = THREE.MathUtils.lerp(
+              darkAmount.current,
+              depth,
+              0.15
+            );
+          },
+          onLeave: () => {
+            darkAmount.current = THREE.MathUtils.lerp(darkAmount.current, 0, 0.15);
+          },
+          onLeaveBack: () => {
+            darkAmount.current = THREE.MathUtils.lerp(darkAmount.current, 0, 0.15);
+          },
+        })
+      );
 
-          // Blend toward the NEXT section color as we approach the bottom
-          const progress = (viewCenter - rect.top) / rect.height;
-          const nextId = SECTION_IDS[i + 1];
-          if (nextId && progress > 0.6) {
-            nextColor = SECTION_COLOR_MAP[nextId];
-            blend = (progress - 0.6) / 0.4; // 0→1 in the last 40%
-          } else {
-            nextColor = activeColor;
-            blend = 0;
-          }
-          break;
-        }
+      console.log(`TechBackground: Created ${triggers.length} ScrollTriggers`);
+      
+      // Refresh ScrollTrigger to recalculate positions
+      ScrollTrigger.refresh();
+    }, 100);
 
-        // Check if we're BETWEEN sections (in the gap before the next one)
-        const nextEl = i < SECTION_IDS.length - 1
-          ? document.getElementById(SECTION_IDS[i + 1])
-          : null;
-        if (nextEl) {
-          const nextRect = nextEl.getBoundingClientRect();
-          if (rect.bottom <= viewCenter && nextRect.top > viewCenter) {
-            activeColor = SECTION_COLOR_MAP[SECTION_IDS[i]];
-            nextColor = SECTION_COLOR_MAP[SECTION_IDS[i + 1]];
-            const gapSize = nextRect.top - rect.bottom;
-            blend = gapSize > 0
-              ? (viewCenter - rect.bottom) / gapSize
-              : 1;
-            break;
-          }
-        }
-      }
-
-      // Set the target color
-      const c = new THREE.Color(activeColor);
-      if (blend > 0) {
-        c.lerp(new THREE.Color(nextColor), blend);
-      }
-      bgColor.current.copy(c);
-
-      // ── Dark amount for shape edge colors ──
-      const gallery = document.getElementById("gallery");
-      if (gallery) {
-        const rect = gallery.getBoundingClientRect();
-        const center = vh / 2;
-        // Start darkening 150px BEFORE gallery top enters viewport center
-        const earlyStart = rect.top - 150;
-        const inside = earlyStart < center && rect.bottom > center;
-        if (inside) {
-          const depth = Math.min(
-            (center - earlyStart) / (vh * 0.2),
-            (rect.bottom - center) / (vh * 0.2),
-            1
-          );
-          darkAmount.current = THREE.MathUtils.lerp(darkAmount.current, depth, 0.15);
-        } else {
-          darkAmount.current = THREE.MathUtils.lerp(darkAmount.current, 0, 0.15);
-        }
-      }
+    // Cleanup - only kill this component's triggers
+    return () => {
+      clearTimeout(timer);
+      console.log("TechBackground: Cleaning up ScrollTriggers");
+      triggers.forEach((trigger) => trigger.kill());
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // initial call
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (

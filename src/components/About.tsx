@@ -9,17 +9,17 @@ gsap.registerPlugin(ScrollTrigger);
 const STORY_CARDS = [
   {
     num: "01",
-    title: "The 'Hello World' Moment",
-    text: "It wasn't pretty. My first website was a mess of bright red backgrounds and scrolling marquee text. But it was mine. That feeling of creating something from nothing — addictive.",
+    title: "<Hello World/>",
+    text: "It wasn't pretty. My first website - back in 2021 - was a mess of bright red backgrounds and scrolling marquee text. But it was mine. That feeling of creating something from nothing; Awesome.",
   },
   {
     num: "02",
-    title: "Embracing the Chaos",
-    text: "College is chaos. Exams, assignments, and late nights debugging. Next.js became my tool of choice to balance academic life with my true passion: building modern, scalable web apps.",
+    title: "cd ./Causality",
+    text: "Life is full of chaos. Given the scenario of causes and effects, I choose to be a creator. I want to build things that didn't exist before. Code is my medium of choice - it's the closest thing we have to magic.",
   },
   {
     num: "03",
-    title: "What's Next?",
+    title: "for me in Next:",
     text: "I'm looking for a place to grow. A team where I can contribute, learn, and break things (in a dev environment, hopefully). I bring hunger, curiosity, and code that ships.",
   },
 ];
@@ -162,20 +162,15 @@ export default function About() {
         <div className="absolute top-20 left-6 md:top-24 md:left-16 z-30">
           <div className="chapter-number mb-4">Chapter 01 — About</div>
           <h2 className="display-heading text-5xl md:text-6xl lg:text-8xl leading-[1] overflow-hidden">
-            <span className="about-title-word inline-block mr-3" style={{ transformStyle: "preserve-3d" }}>
-              Just
-            </span>
             <span className="about-title-word inline-block accent-text italic" style={{ transformStyle: "preserve-3d" }}>
-              Start.
+              Storytime.
             </span>
           </h2>
-          <p className="about-subtitle text-lg md:text-xl text-[var(--text-secondary)] mt-4 max-w-md leading-relaxed">
-            No fancy titles. No corporate buzzwords. <br className="hidden md:block" />
-            Just a student obsessed with turning
+          <p className="hidden md:block about-subtitle text-lg md:text-xl text-[var(--text-secondary)] mt-4 max-w-md leading-relaxed">
+            Grab a cup of
             <span className="font-mono text-sm bg-[var(--bg-secondary)] px-2 py-0.5 rounded mx-1 border border-[var(--border-light)]">
               coffee
             </span>
-            into code.
           </p>
         </div>
 
