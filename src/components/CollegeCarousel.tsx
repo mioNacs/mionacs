@@ -128,10 +128,9 @@ export default function CollegeCarousel() {
       <div className="absolute top-20 left-6 md:left-12 z-50 pointer-events-none mix-blend-difference">
         <div className="chapter-number text-white/50">Chapter 02 — Memories</div>
         <h2
-              className="display-heading text-4xl md:text-5xl lg:text-6xl"
-              style={{ color: "#faf8f4" }}
+              className="display-heading text-4xl md:text-5xl lg:text-6xl accent-text"
             >
-              <span style={{ color: "#e8c860" }}>Carousel</span>
+              Carousel
             </h2>
       </div>
 
@@ -140,7 +139,7 @@ export default function CollegeCarousel() {
         ref={stageRef}
         className="relative flex items-center justify-center"
         style={{
-          perspective: "900px",
+          perspective: "1000px",
           width: "100%",
           height: `${CARD_HEIGHT + 800}px`,
         }}
@@ -153,10 +152,9 @@ export default function CollegeCarousel() {
             style={{
               height: `${CARD_HEIGHT}px`,
               transformStyle: "preserve-3d",
-              // left: "50%",
               marginLeft: `-0px`,
-              WebkitBoxReflect:
-                "below 4px linear-gradient(to top, rgba(255,255,255,0.15), transparent 60%)",
+              // WebkitBoxReflect:
+              //   "below 4px linear-gradient(to top, rgba(255,255,255,0.15), transparent 60%)",
             }}
           >
             {/* Image */}
@@ -174,7 +172,7 @@ export default function CollegeCarousel() {
               className="card-caption text-center mt-3 opacity-0"
               style={{ transform: "translateY(10px)" }}
             >
-              <p className="text-white/70 font-bold text-md mt-0.5" style={{letterSpacing: "1px"}}>{photo.caption}</p>
+              <p className="text-black/80 font-bold text-md mt-0.5" style={{letterSpacing: "1px"}}>{photo.caption}</p>
             </div>
           </div>
         ))}
